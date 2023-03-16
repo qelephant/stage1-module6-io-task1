@@ -11,10 +11,10 @@ public class FileReader {
         String email = "";
         Long phone = 0L;
         
+        FileInputStream fis = new FileInputStream(file);
+        InputStreamReader isr = new InputStreamReader(fis);
+        BufferedReader br = new BufferedReader(isr);
         try {
-            FileInputStream fis = new FileInputStream(file);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.startsWith("Name:")) {
@@ -27,9 +27,10 @@ public class FileReader {
                     phone = Long.parseLong(line.substring(6).trim());
                 }
             }
-            br.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            
+        } finally {
+            br.close();
         }
         return new Profile(name, age, email, phone);
     }
