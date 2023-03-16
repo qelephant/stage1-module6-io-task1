@@ -10,7 +10,7 @@ public class FileReader {
         String name = "";
         int age = 0;
         String email = "";
-        Long phone = "";
+        Long phone = 0L;
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = reader.readLine();
