@@ -5,16 +5,15 @@ import java.io.*;
 
 public class FileReader {
 
-    public Profile getDataFromFile(File file) throws IOException{
+    public Profile getDataFromFile(File file){
         String name = "";
         int age = 0;
         String email = "";
-        Long phone = 0L;
-        
-        FileInputStream fis = new FileInputStream(file);
-        InputStreamReader isr = new InputStreamReader(fis);
-        BufferedReader br = new BufferedReader(isr);
+        Long phone = 0L;       
         try {
+            FileInputStream fis = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.startsWith("Name:")) {
@@ -27,8 +26,11 @@ public class FileReader {
                     phone = Long.parseLong(line.substring(6).trim());
                 }
             }
-        } catch (IOException e) {
-            
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         } finally {
             br.close();
         }
