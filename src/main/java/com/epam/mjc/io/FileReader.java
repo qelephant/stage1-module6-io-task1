@@ -10,7 +10,7 @@ public class FileReader {
         String name = "";
         int age = 0;
         String email = "";
-        String phone = "";
+        Long phone = "";
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = reader.readLine();
@@ -23,7 +23,7 @@ public class FileReader {
                 } else if (line.startsWith("Email:")) {
                     email = line.substring(6).trim();
                 } else if (line.startsWith("Phone:")) {
-                    phone = line.substring(6).trim();
+                    phone = Long.parseLong(line.substring(6).trim());
                 }
                 line = reader.readLine();
             }
