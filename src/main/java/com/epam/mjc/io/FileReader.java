@@ -30,6 +30,6 @@ public class FileReader {
         } finally {
             reader.close();
         }
-        return new Profile(name, age, email, phine);
+        return new Profile(name, age, email, phone);
     }
 }
