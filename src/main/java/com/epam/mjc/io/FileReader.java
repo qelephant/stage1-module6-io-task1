@@ -2,7 +2,7 @@ package com.epam.mjc.io;
 
 import java.io.File;
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.util.Scanner;
 
 public class FileReader {
 
@@ -12,12 +12,13 @@ public class FileReader {
         String email = "";
         Long phone = 0L;
 
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line = reader.readLine();
         try {
-            while (line != null) {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
                 if (line.startsWith("Name:")) {
                     name = line.substring(5).trim();
+                    System.out.println(name);
                 } else if (line.startsWith("Age:")) {
                     age = Integer.parseInt(line.substring(4).trim());
                 } else if (line.startsWith("Email:")) {
@@ -25,10 +26,11 @@ public class FileReader {
                 } else if (line.startsWith("Phone:")) {
                     phone = Long.parseLong(line.substring(6).trim());
                 }
-                line = reader.readLine();
+
             }
-        } finally {
-            reader.close();
+            scanner.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return new Profile(name, age, email, phone);
     }
