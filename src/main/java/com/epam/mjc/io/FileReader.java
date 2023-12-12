@@ -2,14 +2,14 @@ package com.epam.mjc.io;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
-
-        
         String name = "";
         int age = 0;
         String email = "";
@@ -18,6 +18,7 @@ public class FileReader {
         try (FileInputStream fis = new FileInputStream(file);
              InputStreamReader isr = new InputStreamReader(fis);
              BufferedReader br = new BufferedReader(isr)) {
+
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.startsWith("Name:")) {
@@ -31,7 +32,7 @@ public class FileReader {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return new Profile(name, age, email, phone);
     }
