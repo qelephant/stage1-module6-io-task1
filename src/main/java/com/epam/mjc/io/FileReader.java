@@ -29,7 +29,7 @@ public class FileReader {
             }
             br.close();
         } catch (IOException e) {
-           logger.error(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return new Profile(name, age, email, phone);
     }
